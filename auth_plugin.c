@@ -92,7 +92,7 @@ int mosquitto_auth_security_cleanup(void *user_data, struct mosquitto_auth_opt *
 
 int mosquitto_auth_acl_check(void *user_data, const char *clientid, const char *username, const char *topic, int access)
 {
-	if (username && !strncmp(username, "superuser", 200)) {
+	if (username && _username && !strncmp(username, _username, 200)) {
 		return MOSQ_ERR_SUCCESS;
 	} else if (auth_plug_check_topic(topic)) {
 		return MOSQ_ERR_SUCCESS;
@@ -103,7 +103,7 @@ int mosquitto_auth_acl_check(void *user_data, const char *clientid, const char *
 
 int mosquitto_auth_unpwd_check(void *user_data, const char *username, const char *password)
 {
-	if(username && !strncmp(username, "superuser", 200) && password && !strncmp(password, "superpassword", 200)){
+	if(username && _username && !strncmp(username, _username, 200) && password && _password && !strncmp(password, _password, 200)){
 		return MOSQ_ERR_SUCCESS;
 	}
 
