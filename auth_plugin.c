@@ -29,14 +29,15 @@ int auth_plug_check_topic(const char *topic) {
 			slash_count++;
 		} else if ((slash_count == 1) && (strnlen(token, 37) == 36)) {
 			slash_count++;
-		} else if ((slash_count == 2) && (strncmp(token, "c", 2)) == 0) {
+		} else if ((slash_count == 2) && (strncmp(token, "c", 2) == 0)) {
 			slash_count++;
-		} else if (slash_count == 3) {
+		} else if ((slash_count == 3) && (strncmp(token, "#", 2) != 0)){
 			slash_count++;
 		} else if ((slash_count == 4) &&
 					((strncmp(token, "loc", 4) == 0) ||
 					(strncmp(token, "info", 5) == 0) || 
-					(strncmp(token, "status", 7) == 0))) {
+					(strncmp(token, "status", 7) == 0) ||
+					(strncmp(token, "poi", 4) == 0))) {
 			ret_val =  1;
 		} else {
 			break;
